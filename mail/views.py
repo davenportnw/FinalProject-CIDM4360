@@ -1,6 +1,8 @@
 from django.http import HttpResponse
 from mail.models import Resident
 from django.template import loader
+
+
 def index(request):
     resident_list = Resident.objects.order_by('-name')[:5]
     template = loader.get_template('mail/index.html')
@@ -10,9 +12,20 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 
-def detail(request, resident_id):
+def residents(request):
     # resident = Resident.objects.get(pk=resident_id)
-    resident_list = Resident.objects.order_by('-name')[:5]
+    resident_list = Resident.objects.order_by('-name').all()
+    template = loader.get_template('mail/residents.html')
+    context = {
+        'resident_list': resident_list,
+    }
+    # return HttpResponse("You're looking at resident id %s and their name is %s." % (resident.pk, resident.name))
+    return HttpResponse(template.render(context, request))
+
+
+def resident(request, resident_id):
+    # resident = Resident.objects.get(pk=resident_id)
+    resident_list = Resident.objects.order_by('-name')[:1]
     output = ', '.join([r.name for r in resident_list])
     # return HttpResponse("You're looking at resident id %s and their name is %s." % (resident.pk, resident.name))
     return HttpResponse(output)

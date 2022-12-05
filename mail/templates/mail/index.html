@@ -5,15 +5,30 @@
     <title>My test page</title>
   </head>
   <body>
-    {% if resident_list %}
-      <ul>
-      {% for resident in resident_list %}
-          <li><a href="/mail/{{ resident.id }}/">{{ resident.name }}</a></li>
-      {% endfor %}
-      </ul>
-    {% else %}
-      <p>No residents available.</p>
-    {% endif %}
+    <button>New Package</button>
+    <br/>
+    <br/>
+    <button>Pick up Package</button>
+    <br/>
+    <br/>
+    <button>View Package</button>
+    <br/>
+    <br/>
+    <a href="residents">
+      <button>View Residents</button>
+    </a>
+    <br/>
+    <br/>
+    <hr>
+<!--    {% if resident_list %}-->
+<!--      <ul>-->
+<!--      {% for resident in resident_list %}-->
+<!--          <li><a href="/mail/{{ resident.id }}/">{{ resident.name }}</a></li>-->
+<!--      {% endfor %}-->
+<!--      </ul>-->
+<!--    {% else %}-->
+<!--      <p>No residents available.</p>-->
+<!--    {% endif %}-->
 
   </body>
 </html>

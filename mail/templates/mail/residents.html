@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>My test page</title>
+  </head>
+  <body>
+    <a href="/mail/home">
+      <button>Home</button>
+    </a>
+    <hr>
+    {% if resident_list %}
+      <ul>
+      {% for residents in resident_list %}
+          <li>{{ residents.name }}</li>
+      {% endfor %}
+      </ul>
+    {% else %}
+      <p>No residents available.</p>
+    {% endif %}
+
+  </body>
+</html>
+
