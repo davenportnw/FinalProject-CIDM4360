@@ -12,7 +12,7 @@
     {% if resident_list %}
       <ul>
       {% for residents in resident_list %}
-          <li>{{ residents.name }}</li>
+          <li>{{ residents.unit_number }} - {{ residents.name }}</li>
       {% endfor %}
       </ul>
     {% else %}
