@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from mail.models import Resident, Package
 from django.template import loader
+from mail.forms import PackageForm
 
 
 def index(request):
@@ -34,6 +35,12 @@ def history(request, resident_id):
     return HttpResponse(template.render(context, request))
 
 
-from django.shortcuts import render
+def package_form_view(request):
+    template = loader.get_template('mail/package-form.html')
+    form = PackageForm()
+    context = {
+        'form': form
+    }
+    return HttpResponse(template.render(context, request))
 
 # Create your views here.
