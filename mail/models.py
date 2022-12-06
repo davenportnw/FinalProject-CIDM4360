@@ -18,6 +18,9 @@ class Package(models.Model):
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, null=True)
     owner = models.ForeignKey('Resident', models.SET_NULL, blank=True, null=True)
 
+    def __str__(self):
+        return self.status + ' package for unit ' + self.address + ' id:' + str(self.pk)
+
 
 class Resident(models.Model):
     name = models.CharField(max_length=100)

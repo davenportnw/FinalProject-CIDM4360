@@ -12,10 +12,13 @@
       <ul>
           <li>{{ resident.name }}</li>
       </ul>
-      <h3>Packages</h3>
+      <h3>Package History</h3>
+     {% for package in packages %}
       <ul>
-          <li>{{ packages }}</li>
+          <li>{{ package }}</li>
       </ul>
+     {% endfor %}
+
   </body>
 </html>
 
