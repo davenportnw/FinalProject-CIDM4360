@@ -38,7 +38,12 @@ def history(request, resident_id):
 
 def package_form_view(request):
     template = loader.get_template('mail/package-form.html')
-    form = PackageForm()
+    if request.method == 'POST':
+        form = PackageForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = PackageForm()
     context = {
         'form': form
     }

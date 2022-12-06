@@ -9,7 +9,11 @@
       <button>Home</button>
     </a>
    <h1>New Package</h1>
-   {{ form.as_p }}
+    <form action="/mail/packageform" method="post">
+      {{ form.as_p }}
+      {% csrf_token %}
+      <input type="submit" class="btnbtn-primary" value="Submit">
+    </form>
   </body>
 </html>
 
