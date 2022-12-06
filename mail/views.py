@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from mail.models import Resident, Package
 from django.template import loader
+
 from mail.forms import PackageForm
 
 
@@ -43,4 +44,12 @@ def package_form_view(request):
     }
     return HttpResponse(template.render(context, request))
 
+
+def packages(request):
+    template = loader.get_template('mail/packages.html')
+    all_packages = Package.objects.all()
+    context = {
+        'packages': all_packages
+    }
+    return HttpResponse(template.render(context, request))
 # Create your views here.
