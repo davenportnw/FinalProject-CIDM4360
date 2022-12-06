@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from mail.models import Resident, Package
 from django.template import loader
+from django.shortcuts import redirect
 
 from mail.forms import PackageForm
 
@@ -38,10 +39,13 @@ def history(request, resident_id):
 
 def package_form_view(request):
     template = loader.get_template('mail/package-form.html')
+    response = redirect('/mail/packages')
     if request.method == 'POST':
         form = PackageForm(request.POST)
         if form.is_valid():
             form.save()
+            return response
+
     else:
         form = PackageForm()
     context = {
@@ -52,7 +56,7 @@ def package_form_view(request):
 
 def packages(request):
     template = loader.get_template('mail/packages.html')
-    all_packages = Package.objects.all()
+    all_packages = Package.objects.all().order_by('-id')
     context = {
         'packages': all_packages
     }
