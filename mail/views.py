@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from mail.models import Resident
+from mail.models import Resident, Package
 from django.template import loader
 
 
@@ -23,12 +23,15 @@ def residents(request):
     return HttpResponse(template.render(context, request))
 
 
-def resident(request, resident_id):
-    # resident = Resident.objects.get(pk=resident_id)
-    resident_list = Resident.objects.order_by('-name')[:1]
-    output = ', '.join([r.name for r in resident_list])
-    # return HttpResponse("You're looking at resident id %s and their name is %s." % (resident.pk, resident.name))
-    return HttpResponse(output)
+def history(request, resident_id):
+    person = Resident.objects.get(pk=resident_id)
+    packages = Package.objects.filter(owner=person)
+    template = loader.get_template('mail/history.html')
+    context = {
+        'resident': person,
+        'packages': packages
+    }
+    return HttpResponse(template.render(context, request))
 
 
 from django.shortcuts import render

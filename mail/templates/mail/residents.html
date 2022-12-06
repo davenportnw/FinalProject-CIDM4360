@@ -11,8 +11,8 @@
     <hr>
     {% if resident_list %}
       <ul>
-      {% for residents in resident_list %}
-          <li>{{ residents.unit_number }} - {{ residents.name }}</li>
+      {% for resident in resident_list %}
+          <li><a href="/mail/history/{{ resident.id }}">{{ resident.unit_number }} - {{ resident.name }}</a></li>
       {% endfor %}
       </ul>
     {% else %}
