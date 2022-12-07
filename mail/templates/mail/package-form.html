@@ -79,6 +79,9 @@
     <a href="/mail/home">
       <button>Home</button>
     </a>
+   <a href="{% url 'logout_view' %}">
+      <button>Log Out</button>
+   </a>
     <div>
       <h2>Package Information:</h2>
       <form action="/mail/packageform" method="post">
