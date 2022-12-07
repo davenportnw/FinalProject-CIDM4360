@@ -5,14 +5,171 @@
     <title>Residents</title>
   </head>
   <body>
+   <style>
+      header {
+        color: #c6393c;
+        font-size: 40px;
+        border-top-style: groove;
+        text-align: center;
+      }
+      .nav {
+        font-size: 8px;
+        appearance: none;
+        background-color: transparent;
+        border: 2px solid #1A1A1A;
+        border-radius: 15px;
+        box-sizing: border-box;
+        color: #3B3B3B;
+        cursor: pointer;
+        display: inline-block;
+        font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        font-size: 16px;
+        font-weight: 600;
+        line-height: normal;
+        margin: 0;
+        min-height: 60px;
+        min-width: 0;
+        outline: none;
+        padding: 16px 24px;
+        text-align: center;
+        text-decoration: none;
+        transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        width: 8;
+        will-change: transform;
+      }
+      .nav: disabled {
+        pointer-events: none;
+      }
+      .nav:hover {
+        color: #fff;
+        background-color: #1A1A1A;
+        box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+        transform: translateY(-2px);
+      }
+      .nav:active {
+        box-shadow: none;
+        transform: translateY(0);
+      }
+     img {
+      width: 70px;
+     }
+     div {
+      text-align: center;
+     }
+     label {
+      font-family: "Source Sans Pro", "Arial", sans-serif;
+      font-size: 20px;
+     }
+     input {
+     font-size: 20px;
+     }
+     h2 {
+       font-size: 30px;
+       color: #646066;
+       font-family: "Source Sans Pro", "Arial", sans-serif;
+     }
+       h1 {
+       font-size: 30px;
+       color: #646066;
+       font-family: "Source Sans Pro", "Arial", sans-serif;
+       text-align: center;
+     }
+     .button-89 {
+        --b: 3px;   /* border thickness */
+        --s: .45em; /* size of the corner */
+        --color: #373B44;
+
+        padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+        color: var(--color);
+        --_p: var(--s);
+        background:
+          conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
+          var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+        transition: .3s linear, color 0s, background-color 0s;
+        outline: var(--b) solid #0000;
+        outline-offset: .6em;
+        font-size: 16px;
+
+        border: 0;
+
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+      }
+
+      .button-89:hover,
+      .button-89:focus-visible{
+        --_p: 0px;
+        outline-color: var(--color);
+        outline-offset: .05em;
+      }
+
+      .button-89:active {
+        background: var(--color);
+        color: #fff;
+      }
+      <!-- HTML !-->
+<button class="button-55" role="button">Button 55</button>
+
+/* CSS */
+.button-55 {
+  align-self: center;
+  background-color: #fff;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #41403e;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Neucha, sans-serif;
+  font-size: 1rem;
+  line-height: 23px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-55:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+
+.button-55:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+}
+    </style>
+     <header>
+      Amarillo Apartments Package Manager
+      <img src="https://www.pixelproductionsinc.com/wp-content/uploads/2012/12/packaging-icon.png"/>
+    </header>
     <a href="/mail/home">
-      <button>Home</button>
+      <button class="nav">Home</button>
     </a>
-    <hr>
+   <a href="{% url 'logout_view' %}">
+      <button class="nav">Log Out</button>
+   </a>
+     <h1>All Residents</h1>
     {% if resident_list %}
       <ul>
       {% for resident in resident_list %}
-          <li><a href="/mail/history/{{ resident.id }}">{{ resident.unit_number }} - {{ resident.name }}</a></li>
+        <li><a href="/mail/history/{{ resident.id }}"><button class="button-89">{{ resident.unit_number }} - {{ resident.name }}</button></a></li>
       {% endfor %}
       </ul>
     {% else %}
