@@ -3,10 +3,13 @@ from django.http import HttpResponse
 from mail.models import Resident, Package
 from django.template import loader
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
 
 from mail.forms import PackageForm
 
 
+@login_required(login_url='/accounts/login/')
 def index(request):
     resident_list = Resident.objects.order_by('-name')[:5]
     template = loader.get_template('mail/index.html')
@@ -16,6 +19,7 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/accounts/login/')
 def residents(request):
     # resident = Resident.objects.get(pk=resident_id)
     resident_list = Resident.objects.order_by('-name').all()
@@ -27,6 +31,7 @@ def residents(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/accounts/login/')
 def history(request, resident_id):
     person = Resident.objects.get(pk=resident_id)
     packages = Package.objects.filter(owner=person)
@@ -38,6 +43,7 @@ def history(request, resident_id):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/accounts/login/')
 def package_form_view(request):
     template = loader.get_template('mail/package-form.html')
     if request.method == 'POST':
@@ -48,7 +54,8 @@ def package_form_view(request):
             # check if owner is a resident to send confirmation email (owner is not null)
             person = Resident.objects.get(unit_number=form.cleaned_data['address'], name=form.cleaned_data['name'])
             # Create the EmailClient object that you use to send Email messages.
-            email_client = EmailClient.from_connection_string("endpoint=https://davenportcommunicationservices.communication.azure.com/;accesskey=rsWSCkRLpfKj8EdyFnQCg/zGb/sNM9P2sf1g66vMQvgN5gkmQEnUx8M4VtdFrw8CmudfLJ3yB5bP7xOLjchP/A==")
+            email_client = EmailClient.from_connection_string(
+                "endpoint=https://davenportcommunicationservices.communication.azure.com/;accesskey=rsWSCkRLpfKj8EdyFnQCg/zGb/sNM9P2sf1g66vMQvgN5gkmQEnUx8M4VtdFrw8CmudfLJ3yB5bP7xOLjchP/A==")
             content = EmailContent(
                 subject="Package Notification",
                 plain_text="Hello, We have received a package in the office for you. Due to limited storing space, "
@@ -73,6 +80,7 @@ def package_form_view(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/accounts/login/')
 def packages(request):
     template = loader.get_template('mail/packages.html')
     pending_packages = Package.objects.filter(status='PENDING').order_by('-id')
@@ -86,6 +94,7 @@ def packages(request):
     return HttpResponse(template.render(context, request))
 
 
+@login_required(login_url='/accounts/login/')
 def pickup(request):
     package_id = request.POST.get('package_id')
     package = Package.objects.get(pk=package_id)
@@ -94,3 +103,19 @@ def pickup(request):
     response = redirect('/mail/packages')
     return response
 
+
+def login_view(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        # Redirect to a success page.
+        ...
+    else:
+        # Return an 'invalid login' error message.
+        ...
+
+
+def logout_view(request):
+    logout(request)
