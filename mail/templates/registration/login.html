@@ -5,11 +5,22 @@
   </head>
   <body>
     <style>
-      h1 {color: #d02f41; text-align: center; font-family: "Source Sans Pro", "Arial", sans-serif; text-shadow: 2px 2px #540503;}
-      h3 {color: #d02f41; text-align: center; font-family: "Source Sans Pro", "Arial", sans-serif;}
+      header {
+        color: #4977b6;
+        font-size: 40px;
+        border-top-style: groove;
+        text-align: center;
+      }
+      img {
+      width: 70px;
+     }
+      h3 {color: #b68849; text-align: center; font-family: "Source Sans Pro", "Arial", sans-serif;}
       form {text-align: center; border-style: outset; }
     </style>
-    <h1>Welcome to Amarillo Appartments Package Management</h1>
+     <header>
+      Welcome to Amarillo Apartments Package Manager
+      <img src="https://www.pixelproductionsinc.com/wp-content/uploads/2012/12/packaging-icon.png"/>
+    </header>
     <h3> Please login to continue</h3>
     <form method="post">
       {% csrf_token %}

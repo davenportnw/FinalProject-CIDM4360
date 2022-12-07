@@ -52,7 +52,11 @@ def package_form_view(request):
             form.save()
             # send email for pending packages
             # check if owner is a resident to send confirmation email (owner is not null)
-            person = Resident.objects.get(unit_number=form.cleaned_data['address'], name=form.cleaned_data['name'])
+            try:
+                person = Resident.objects.get(unit_number=form.cleaned_data['address'], name=form.cleaned_data['name'])
+            except Resident.DoesNotExist:
+                return redirect('/mail/packages')
+
             # Create the EmailClient object that you use to send Email messages.
             email_client = EmailClient.from_connection_string(
                 "endpoint=https://davenportcommunicationservices.communication.azure.com/;accesskey=rsWSCkRLpfKj8EdyFnQCg/zGb/sNM9P2sf1g66vMQvgN5gkmQEnUx8M4VtdFrw8CmudfLJ3yB5bP7xOLjchP/A==")
@@ -72,6 +76,7 @@ def package_form_view(request):
             email_response = email_client.send(message)
             response = redirect('/mail/packages')
             return response
+
     else:
         form = PackageForm()
     context = {
