@@ -64,7 +64,7 @@ def package_form_view(request):
             )
             email_response = email_client.send(message)
             response = redirect('/mail/packages')
-            return response, email_response
+            return response
     else:
         form = PackageForm()
     context = {
