@@ -109,22 +109,7 @@
           <h2 class="resident">Resident: {{ resident.name }}</h2>
         </ul>
         <h3>Package History</h3>
-        <h2><u>Pending Packages</u></h2>
         {% for package in packages %}
-            <ul>
-                <li>{{ package }} ---- received: {{ package.received }}</li>
-            </ul>
-        {% endfor %}
-        <hr class="pkg_line"/>
-        <h2><u>Unknown Packages</u></h2>
-        {% for package in packages %}
-            <ul>
-                <li>{{ package }} ---- received: {{ package.received }}</li>
-            </ul>
-        {% endfor %}
-        <hr class="pkg_line"/>
-        <h2><u>Delivered Packages</u></h2>
-       {% for package in packages %}
             <ul>
                 <li>{{ package }} ---- received: {{ package.received }}</li>
             </ul>
