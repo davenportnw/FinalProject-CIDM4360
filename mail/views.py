@@ -39,11 +39,11 @@ def history(request, resident_id):
 
 def package_form_view(request):
     template = loader.get_template('mail/package-form.html')
-    response = redirect('/mail/packages')
     if request.method == 'POST':
         form = PackageForm(request.POST)
         if form.is_valid():
             form.save()
+            response = redirect('/mail/packages')
             return response
 
     else:
@@ -56,9 +56,13 @@ def package_form_view(request):
 
 def packages(request):
     template = loader.get_template('mail/packages.html')
-    all_packages = Package.objects.all().order_by('-id')
+    pending_packages = Package.objects.filter(status='PENDING').order_by('-id')
+    unknown_packages = Package.objects.filter(status='UNKNOWN').order_by('-id')
+    delivered_packages = Package.objects.filter(status='DELIVERED').order_by('-id')
     context = {
-        'packages': all_packages
+        'pending_packages': pending_packages,
+        'unknown_packages': unknown_packages,
+        'delivered_packages': delivered_packages
     }
     return HttpResponse(template.render(context, request))
 # Create your views here.

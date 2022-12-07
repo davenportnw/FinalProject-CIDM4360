@@ -8,10 +8,24 @@
     <a href="/mail/home">
       <button>Home</button>
     </a>
-    <h1>Packages</h1>
-    {% for package in packages %}
+    <h1>All Packages</h1>
+    {% for package in pending_packages %}
         <ul>
-            <li>{{ package }}</li>
+            <li>{{ package }} ---- received: {{ package.received }}
+                <button>Pick up</button>
+            </li>
+        </ul>
+    {% endfor %}
+    <hr/>
+   {% for package in unknown_packages %}
+        <ul>
+            <li>{{ package }} ---- received: {{ package.received }}</li>
+        </ul>
+    {% endfor %}
+    <hr/>
+   {% for package in delivered_packages %}
+        <ul>
+            <li>{{ package }} ---- received: {{ package.received }}</li>
         </ul>
     {% endfor %}
   </body>

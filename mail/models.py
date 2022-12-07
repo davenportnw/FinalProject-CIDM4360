@@ -19,7 +19,7 @@ class Package(models.Model):
     owner = models.ForeignKey('Resident', models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
-        return self.status + ' package for unit ' + self.address + ' id:' + str(self.pk)
+        return self.status + ' package for unit ' + self.address
 
 
 class Resident(models.Model):
