@@ -5,9 +5,66 @@
     <title>Home</title>
   </head>
   <body>
-  <a href="{% url 'logout_view' %}">
-    <button>Log Out</button>
-  </a>
+  <style>
+  header {
+    color: #c6393c;
+    font-size: 40px;
+    border-top-style: groove;
+    text-align: center;
+  }
+  button {
+    font-size: 18px;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid #1A1A1A;
+    border-radius: 15px;
+    box-sizing: border-box;
+    color: #3B3B3B;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    margin: 0;
+    min-height: 60px;
+    min-width: 0;
+    outline: none;
+    padding: 16px 24px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 100%;
+    will-change: transform;
+  }
+  button: disabled {
+    pointer-events: none;
+  }
+  button:hover {
+    color: #fff;
+    background-color: #1A1A1A;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+  }
+  button:active {
+    box-shadow: none;
+    transform: translateY(0);
+  }
+  img {
+    width: 70px;
+  }
+
+
+  </style>
+    <header>
+      Amarillo Apartments Package Manager
+      <img src="https://www.pixelproductionsinc.com/wp-content/uploads/2012/12/packaging-icon.png"/>
+    </header>
+    <br/>
+    <br/>
     <a href="packageform">
       <button>New Package</button>
     </a>
@@ -28,6 +85,9 @@
     </a>
     <br/>
     <br/>
+    <a href="{% url 'logout_view' %}">
+      <button>Log Out</button>
+    </a>
     <hr>
 <!--    {% if resident_list %}-->
 <!--      <ul>-->
