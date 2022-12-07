@@ -1,3 +1,4 @@
+from azure.communication.email import EmailClient, EmailContent, EmailAddress, EmailRecipients, EmailMessage
 from django.http import HttpResponse
 from mail.models import Resident, Package
 from django.template import loader
@@ -43,9 +44,27 @@ def package_form_view(request):
         form = PackageForm(request.POST)
         if form.is_valid():
             form.save()
+            # send email for pending packages
+            # check if owner is a resident to send confirmation email (owner is not null)
+            person = Resident.objects.get(unit_number=form.cleaned_data['address'], name=form.cleaned_data['name'])
+            # Create the EmailClient object that you use to send Email messages.
+            email_client = EmailClient.from_connection_string("endpoint=https://davenportcommunicationservices.communication.azure.com/;accesskey=rsWSCkRLpfKj8EdyFnQCg/zGb/sNM9P2sf1g66vMQvgN5gkmQEnUx8M4VtdFrw8CmudfLJ3yB5bP7xOLjchP/A==")
+            content = EmailContent(
+                subject="Package Notification",
+                plain_text="Hello, We have received a package in the office for you. Due to limited storing space, "
+                           "you will have 5 days to pick up your package. Or it will be sent back with the post "
+                           "office. Thank you!",
+            )
+            address = EmailAddress(email=person.email)
+            recipients = EmailRecipients(to=[address])
+            message = EmailMessage(
+                sender="DoNotReply@28e4fcda-9e29-469d-bb7a-c27455b91f5f.azurecomm.net",
+                content=content,
+                recipients=recipients
+            )
+            email_response = email_client.send(message)
             response = redirect('/mail/packages')
-            return response
-
+            return response, email_response
     else:
         form = PackageForm()
     context = {
