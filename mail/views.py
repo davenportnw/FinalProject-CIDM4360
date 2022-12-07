@@ -65,4 +65,13 @@ def packages(request):
         'delivered_packages': delivered_packages
     }
     return HttpResponse(template.render(context, request))
-# Create your views here.
+
+
+def pickup(request):
+    package_id = request.POST.get('package_id')
+    package = Package.objects.get(pk=package_id)
+    package.status = 'DELIVERED'
+    package.save()
+    response = redirect('/mail/packages')
+    return response
+

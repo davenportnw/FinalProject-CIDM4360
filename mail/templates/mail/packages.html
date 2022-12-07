@@ -12,7 +12,11 @@
     {% for package in pending_packages %}
         <ul>
             <li>{{ package }} ---- received: {{ package.received }}
-                <button>Pick up</button>
+                <form action="/mail/pickup" method="post">
+                    <input type="hidden" name="package_id" value="{{ package.pk }}"/>
+                    {% csrf_token %}
+                    <input type="submit" class="btnbtn-primary" value="Pick up">
+                </form>
             </li>
         </ul>
     {% endfor %}
