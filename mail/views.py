@@ -114,8 +114,11 @@ def login_view(request):
         ...
     else:
         # Return an 'invalid login' error message.
+        return redirect('login')
         ...
 
 
 def logout_view(request):
     logout(request)
+    return redirect('/accounts/login/?next=/mail/home')
+

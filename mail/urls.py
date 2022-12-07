@@ -8,5 +8,6 @@ urlpatterns = [
     path('history/<int:resident_id>', views.history, name='history'),
     path('packageform', views.package_form_view, name='package_form_view'),
     path('packages', views.packages, name='packages'),
-    path('pickup', views.pickup, name='pickup')
+    path('pickup', views.pickup, name='pickup'),
+    path('logout', views.logout_view, name='logout_view')
 ]
