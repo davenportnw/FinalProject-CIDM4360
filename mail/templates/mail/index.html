@@ -37,7 +37,7 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-    width: 100%;
+    width: 800px;
     will-change: transform;
   }
   button: disabled {
@@ -56,6 +56,9 @@
   img {
     width: 70px;
   }
+  div {
+  text-align: center;
+  }
 
 
   </style>
@@ -65,40 +68,31 @@
     </header>
     <br/>
     <br/>
-    <a href="packageform">
+    <div>
+      <a href="packageform">
       <button>New Package</button>
-    </a>
-    <br/>
-    <br/>
-    <a href="packages">
-      <button>Pick up package</button>
-    </a>
-    <br/>
-    <br/>
-    <a href="packages">
-      <button>View Package</button>
-    </a>
-    <br/>
-    <br/>
-    <a href="residents">
-      <button>View Residents</button>
-    </a>
-    <br/>
-    <br/>
-    <a href="{% url 'logout_view' %}">
-      <button>Log Out</button>
-    </a>
-    <hr>
-<!--    {% if resident_list %}-->
-<!--      <ul>-->
-<!--      {% for resident in resident_list %}-->
-<!--          <li><a href="/mail/{{ resident.id }}/">{{ resident.name }}</a></li>-->
-<!--      {% endfor %}-->
-<!--      </ul>-->
-<!--    {% else %}-->
-<!--      <p>No residents available.</p>-->
-<!--    {% endif %}-->
-
+      </a>
+      <br/>
+      <br/>
+      <a href="packages">
+        <button>Pick up package</button>
+      </a>
+      <br/>
+      <br/>
+      <a href="packages">
+        <button>View Package</button>
+      </a>
+      <br/>
+      <br/>
+      <a href="residents">
+        <button>View Residents</button>
+      </a>
+      <br/>
+      <br/>
+      <a href="{% url 'logout_view' %}">
+        <button>Log Out</button>
+      </a>
+    </div>
   </body>
 </html>
 
